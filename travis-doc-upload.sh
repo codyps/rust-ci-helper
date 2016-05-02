@@ -7,8 +7,8 @@ set -eufx
 
 D="$(dirname "$0")"
 CFG="$D/../ci-config"
-. "$D/common.sh"
 . "$CFG/travis-doc-upload.cfg"
+. "$D/common.sh"
 
 [ "$TRAVIS_BRANCH" = master ] || [ "$TRAVIS_BRANCH" = "doc-test" ]
 
