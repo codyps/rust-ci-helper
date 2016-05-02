@@ -55,6 +55,7 @@ case "$TARGET" in
     ;;
   *)
     run_cargo test
+    run_cargo bench
     ;;
 esac
 
