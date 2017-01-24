@@ -5,13 +5,8 @@ set -ex
 
 . "$(dirname "$0")/common.sh"
 
-# Install multirust
-git clone https://github.com/brson/multirust
-pushd multirust
-./build.sh
-./install.sh --prefix=~/multirust
-multirust default $CHANNEL
-popd
+# Install rustup
+curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain "$CHANNEL"
 
 # Install standard libraries needed for cross compilation
 if [ "$host" != "$TARGET" ]; then
@@ -26,28 +21,4 @@ if [ "$host" != "$TARGET" ]; then
 linker = "arm-linux-gnueabihf-gcc"
 EOF
   fi
-
-  if [ "$CHANNEL" = "nightly" ]; then
-    multirust add-target nightly $TARGET
-  else
-    if [ "$CHANNEL" = "stable" ]; then
-      # e.g. 1.6.0
-      version=$(rustc -V | cut -d' ' -f2)
-    else
-      version=beta
-    fi
-
-    tarball=rust-std-${version}-${TARGET}
-
-    curl -Os http://static.rust-lang.org/dist/${tarball}.tar.gz
-
-    tar xzf ${tarball}.tar.gz
-
-    ${tarball}/install.sh --prefix=$(rustc --print sysroot)
-
-    rm -r ${tarball}
-    rm ${tarball}.tar.gz
-  fi
 fi
-
-# TODO if you need to install extra stuff add it here

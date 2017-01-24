@@ -10,12 +10,11 @@ CFG="$D/../ci-config"
 . "$CFG/travis-doc-upload.cfg"
 . "$D/common.sh"
 
+[ ! "$DO_DOC" ] || { echo "doc generation disabled"; exit 0 }
 [ "$TRAVIS_BRANCH" = master ] || [ "$TRAVIS_BRANCH" = "doc-test" ]
-
-# FIXME: ssh known hosts handling does not appear to work with travis-osx
-[ "$TRAVIS_OS_NAME" != osx ]
-
 [ "$TRAVIS_PULL_REQUEST" = false ]
+
+run_cargo doc
 
 set +x
 eval key=\$encrypted_${SSH_KEY_TRAVIS_ID}_key
