@@ -6,7 +6,8 @@ set -ex
 . "$(dirname "$0")/common.sh"
 
 # Install rustup
-curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain "$CHANNEL"
+curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain "$TRAVIS_RUST_VERSION"
+rustup target add "$TARGET"
 
 # Install standard libraries needed for cross compilation
 if [ "$host" != "$TARGET" ]; then
