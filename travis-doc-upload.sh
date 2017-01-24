@@ -11,9 +11,9 @@ CFG="$D/../ci-config"
 . "$D/common.sh"
 
 : ${DO_DOC:=false}
-[ "$DO_DOC" ] || { echo "doc generation disabled"; exit 0; }
+"$DO_DOC" || { echo "doc generation disabled"; exit 0; }
 [ "$TRAVIS_BRANCH" = master ] || [ "$TRAVIS_BRANCH" = "doc-test" ]
-[ "$TRAVIS_PULL_REQUEST" = false ]
+! "$TRAVIS_PULL_REQUEST"
 
 run_cargo doc
 

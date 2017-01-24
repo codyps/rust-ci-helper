@@ -7,7 +7,9 @@ set -ex
 
 # Install rustup
 curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain "$TRAVIS_RUST_VERSION"
-rustup target add "$TARGET"
+if $CROSS; then
+	rustup target add "$TARGET"
+fi
 
 # tell cargo which linker to use for cross compilation
 mkdir -p .cargo
