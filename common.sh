@@ -24,6 +24,7 @@ run_cargo() {
 
 export TARGET_CC=cc
 RUN_COMPAT=true
+CROSS=false
 if [ "$host" != "$TARGET" ]; then
   CROSS=true
   RUN_COMPAT=false
