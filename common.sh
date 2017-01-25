@@ -16,9 +16,9 @@ PROJECT_NAME="$PROJECT_BASE/${TARGET}/${TRAVIS_RUST_VERSION}"
 
 run_cargo() {
   if [ -n "${FEATURES:-}" ]; then
-    cargo "$@" --verbose --target="$TARGET" --features="$FEATURES"
+    cargo "$@" --all --verbose --target="$TARGET" --features="$FEATURES"
   else
-    cargo "$@" --verbose --target="$TARGET"
+    cargo "$@" --all --verbose --target="$TARGET"
   fi
 }
 
