@@ -21,7 +21,7 @@ remove_relative() {
 	IFS=":"
 	for i in $v; do
 		case "$i" in
-		/*) o="$o:$i" ;;
+		/*|~*) o="$o:$i" ;;
 		esac
 	done
 	
