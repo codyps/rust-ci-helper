@@ -32,7 +32,10 @@ remove_relative() {
 	IFS="$oifs"
 	echo "$o"
 }
+
+echo "Old PATH=$PATH"
 export PATH=$(remove_relative "$PATH")
+echo "New PATH=$PATH"
 
 : ${DIRS:=.}
 
