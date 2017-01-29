@@ -14,6 +14,26 @@ esac
 host=${host_arch}${host_vendor:-}-${host_os}
 PROJECT_NAME="$PROJECT_BASE/${TARGET}/${TRAVIS_RUST_VERSION}"
 
+remove_relative() {
+	local o=
+	local oifs="$IFS"
+	local v="$1"
+	IFS=":"
+	for i in $v; do
+		case "$i" in
+		/*) o="$o:$i" ;;
+		esac
+	done
+	
+	case "$o" in
+	:*) o=${o##:} ;;
+	esac
+
+	IFS="$oifs"
+	echo "$o"
+}
+export PATH=$(remove_relative "$PATH")
+
 : ${DIRS:=.}
 
 run_cargo() {
