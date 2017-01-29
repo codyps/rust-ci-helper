@@ -18,5 +18,5 @@ else
   run_cargo test --no-run
 
   # run tests in emulator
-  find "target/$TARGET/debug" -maxdepth 1 -executable -type f -fprintf /dev/stderr "test: %p" -print0 | xargs -0 qemu-$TARGET_ARCH -L /usr/$TARGET_ARCH-$TARGET_OS
+  find "target/$TARGET/debug" -maxdepth 1 -executable -type f -fprintf /dev/stderr "test: %p" -execdir qemu-$TARGET_ARCH -L /usr/$TARGET_ARCH-$TARGET_OS \;
 fi
