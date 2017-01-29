@@ -1,7 +1,6 @@
 #! /bin/bash
 # `install` phase: install stuff needed for the `script` phase
-
-set -ex
+set -ex -o pipefail
 
 . "$(dirname "$0")/common.sh"
 

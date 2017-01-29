@@ -2,7 +2,7 @@
 # ex: sts=2 sw=2 ts=2 et
 # `script` phase: you usually build, test and generate docs in this phase
 
-set -ex
+set -ex -o pipefail
 
 . "$(dirname "$0")/common.sh"
 

@@ -14,12 +14,19 @@ esac
 host=${host_arch}${host_vendor:-}-${host_os}
 PROJECT_NAME="$PROJECT_BASE/${TARGET}/${TRAVIS_RUST_VERSION}"
 
+: ${DIRS:=.}
+
 run_cargo() {
-  if [ -n "${FEATURES:-}" ]; then
-    cargo "$@" --all --verbose --target="$TARGET" --features="$FEATURES"
-  else
-    cargo "$@" --all --verbose --target="$TARGET"
-  fi
+  for d in ${DIRS}; do
+	  (
+	  cd "$d"
+	  if [ -n "${FEATURES:-}" ]; then
+	    cargo "$@" --verbose --target="$TARGET" --features="$FEATURES"
+	  else
+	    cargo "$@" --verbose --target="$TARGET"
+	  fi
+	  )
+  done
 }
 
 export TARGET_CC=cc
