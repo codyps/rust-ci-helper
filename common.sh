@@ -33,9 +33,11 @@ remove_relative() {
 	echo "$o"
 }
 
+set +x
 echo "Old PATH=$PATH"
 export PATH=$(remove_relative "$PATH")
 echo "New PATH=$PATH"
+set -x
 
 : ${DIRS:=.}
 
