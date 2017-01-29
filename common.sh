@@ -22,7 +22,7 @@ remove_relative() {
 	for i in $v; do
 		case "$i" in
 		/*) o="$o:$i" ;;
-		~/*) o="$o:${HOME}${i##'~'}"
+		'~'/*) o="$o:${HOME}${i##'~'}"
 		esac
 	done
 	
